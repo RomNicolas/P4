@@ -28,3 +28,9 @@ function addComment($postId, $author, $comment) {
 		header('Location: index.php?action=post&id=' . $postId);
 	}
 }
+
+function viewComment() {
+	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+	$comment = $commentManager->getComment($_GET['id']);
+	require('view/frontend/editView.php');
+}
