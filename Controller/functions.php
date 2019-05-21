@@ -1,12 +1,12 @@
 <?php
 
 // Chargement des classes
-require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
+require_once('model/articleManager.php');
+require_once('model/commentManager.php');
 
 function listArticles() {
 	$postManager = new \OpenClassrooms\Blog\Model\ArticleManager();
-	$posts = $postManager->getPosts();
+	$posts = $postManager->getArticles();
 	require('View/listArticlesView.php');
 }
 
@@ -32,7 +32,7 @@ function addComment($postId, $author, $comment) {
 function viewComment() {
 	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
 	$comment = $commentManager->getComment($_GET['id']);
-	require('view/frontend/editView.php');
+	require('View/editView.php');
 }
 
 function editComment($id, $comment) {
