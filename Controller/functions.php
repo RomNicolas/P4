@@ -34,3 +34,15 @@ function viewComment() {
 	$comment = $commentManager->getComment($_GET['id']);
 	require('view/frontend/editView.php');
 }
+
+function editComment($id, $comment) {
+	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+	$newComment = $commentManager->updateComment($id, $comment);
+	if ($newComment === false) {
+		throw new Exception('Impossible de modifier le commentaire !');
+	}
+	else {
+		echo 'commentaire : ' . $_POST['comment'];
+		header('Location: index.php');
+	}
+}
