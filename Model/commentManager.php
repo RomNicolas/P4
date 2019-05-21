@@ -14,4 +14,12 @@ class CommentManager extends Manager
 		return $comments;
 	}
 
+	//Permet la création d'un commentaire
+	public function postComment($postId, $author, $comment) {
+		$db = $this->dbConnect();
+		$comments = $db->prepare('INSERT INTO comments(article_id, author, comment, date_creation) VALUES(?, ?, ?, NOW())');
+		$affectedLines = $comments->execute(array($postId, $author, $comment));
+		return $affectedLines;
+	}
+
 }
