@@ -6,12 +6,21 @@ require_once("model/Manager.php");
 class CommentManager extends Manager
 {
 
-	//Recupère les commentaires d'un article
+	//Récupère les commentaires d'un article
     public function getComments($postId) {
 		$db = $this->dbConnect();
 		$comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE article_id = ? ORDER BY date_creation DESC');
 		$comments->execute(array($postId));
 		return $comments;
+	}
+
+	//Récupère un commentaire pour pouvoir le modifier
+	public function getComment($id) {
+		$db = $this->dbConnect();
+		$req = $db->prepare('SELECT id, author, comment, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id = ?');
+		$req->execute(array($id));
+		$comment = $req->fetch();
+		return $comment;
 	}
 
 	//Permet la création d'un commentaire
