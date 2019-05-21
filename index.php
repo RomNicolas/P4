@@ -16,7 +16,7 @@ try {
 			}
 		}
 	}else {
-		listPosts();
+		listArticles();
 	}
 
 }
