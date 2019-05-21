@@ -47,4 +47,9 @@ class CommentManager extends Manager
 		return $deleteComment;
 	}
 
+	//Récupère les commentaires qui ont été signalés
+	public function reportComments() {
+		//SELECT
+	}
+
 }
