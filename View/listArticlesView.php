@@ -1,0 +1,1 @@
+<?php $title= "Un billet simple pour l'Alaska"; ?>
