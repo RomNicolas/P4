@@ -10,7 +10,7 @@ function listArticles() {
 	require('View/listArticlesView.php');
 }
 
-function post() {
+function article() {
 	$postManager = new \OpenClassrooms\Blog\Model\PostManager();
 	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
 	$post = $postManager->getPost($_GET['id']);
