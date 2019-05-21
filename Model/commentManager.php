@@ -39,4 +39,12 @@ class CommentManager extends Manager
 		return $newComment;
 	}
 
+	//Confirme la suppression du commentaire
+	public function deleteComment($id) {
+		$db = $this->dbConnect();
+		$req = $db->prepare('DELETE FROM comments WHERE id = ?');
+		$deleteComment = $req->execute(array($id));
+		return $deleteComment;
+	}
+
 }
