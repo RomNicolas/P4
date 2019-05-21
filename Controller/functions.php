@@ -46,3 +46,15 @@ function editComment($id, $comment) {
 		header('Location: index.php');
 	}
 }
+
+function delComment($id) {
+	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+	$deleteComment = $commentManager->deleteComment($id);
+	if ($deleteComment === false) {
+		throw new Exception('Impossible de modifier le commentaire !');
+	}
+	else {
+		echo 'commentaire : ' . $_POST['comment'];
+		header('Location: index.php');
+	}
+}
