@@ -26,7 +26,7 @@ class CommentManager extends Manager
 	//Permet la création d'un commentaire
 	public function createComment($postId, $author, $comment) {
 		$db = $this->dbConnect();
-		$comments = $db->prepare('INSERT INTO comments(id_article, author, comment, date_creation) VALUES(?, ?, ?, NOW())');
+		$comments = $db->prepare('INSERT INTO comments(id_article, author, comment, date_creation, report) VALUES(?, ?, ?, NOW(), 0)');
 		$affectedLines = $comments->execute(array($postId, $author, $comment));
 		return $affectedLines;
 	}
@@ -49,8 +49,8 @@ class CommentManager extends Manager
 
 	//Confirme le signalement du commentaire
 	public function reportComment($id) {
-		$db = Manager::connectionBdd();
-		$comments = $pdo->prepare('UPDATE comments SET report = 1 WHERE id = ?');
+		$db = $this->dbConnect();
+		$comments = $db->prepare('UPDATE comments SET report = 1 WHERE id = ?');
 		$comments->execute(array($id));
 		return $comments;
     }
