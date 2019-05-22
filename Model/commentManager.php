@@ -9,7 +9,7 @@ class CommentManager extends Manager
 	//Récupère les commentaires d'un article
     public function getComments($postId) {
 		$db = $this->dbConnect();
-		$comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE article_id = ? ORDER BY date_creation DESC');
+		$comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE id_article = ? ORDER BY date_creation DESC');
 		$comments->execute(array($postId));
 		return $comments;
 	}
@@ -26,7 +26,7 @@ class CommentManager extends Manager
 	//Permet la création d'un commentaire
 	public function createComment($postId, $author, $comment) {
 		$db = $this->dbConnect();
-		$comments = $db->prepare('INSERT INTO comments(article_id, author, comment, date_creation) VALUES(?, ?, ?, NOW())');
+		$comments = $db->prepare('INSERT INTO comments(id_article, author, comment, date_creation) VALUES(?, ?, ?, NOW())');
 		$affectedLines = $comments->execute(array($postId, $author, $comment));
 		return $affectedLines;
 	}
@@ -46,6 +46,14 @@ class CommentManager extends Manager
 		$deleteComment = $req->execute(array($id));
 		return $deleteComment;
 	}
+
+	//Confirme le signalement du commentaire
+	public function reportComment($id) {
+		$db = Manager::connectionBdd();
+		$comments = $pdo->prepare('UPDATE comments SET report = 1 WHERE id = ?');
+		$comments->execute(array($id));
+		return $comments;
+    }
 
 	//Récupère les commentaires qui ont été signalés
 	public function reportComments() {
