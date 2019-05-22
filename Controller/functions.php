@@ -13,26 +13,26 @@ function listArticles() {
 function article() {
 	$postManager = new \OpenClassrooms\Blog\Model\ArticleManager();
 	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
-	$post = $postManager->getPost($_GET['id']);
+	$post = $postManager->getArticle($_GET['id']);
 	$comments = $commentManager->getComments($_GET['id']);
 	require('View/articleView.php');
 }
 
 function addComment($postId, $author, $comment) {
 	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
-	$affectedLines = $commentManager->postComment($postId, $author, $comment);
+	$affectedLines = $commentManager->createComment($postId, $author, $comment);
 	if ($affectedLines === false) {
 		throw new Exception('Impossible d\'ajouter le commentaire !');
 	}
 	else {
-		header('Location: index.php?action=post&id=' . $postId);
+		header('Location: index.php?action=article&id=' . $postId);
 	}
 }
 
 function viewComment() {
 	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
 	$comment = $commentManager->getComment($_GET['id']);
-	require('View/editView.php');
+	require('View/editComView.php');
 }
 
 function editComment($id, $comment) {
@@ -55,6 +55,17 @@ function delComment($id) {
 	}
 	else {
 		echo 'commentaire : ' . $_POST['comment'];
+		header('Location: index.php');
+	}
+}
+
+function reportComment($id) {
+	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+	$reportComment = $commentManager->reportComment($id);
+	if ($reportComment === false) {
+		throw new Exception('Impossible de signaler le commentaire !');
+	}
+	else {
 		header('Location: index.php');
 	}
 }
