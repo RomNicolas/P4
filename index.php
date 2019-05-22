@@ -67,8 +67,8 @@ try {
 				$pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
 				if($_POST['name'] == "admin" && $pwd == password_verify('admin', $pwd)) {
 					$_SESSION['name'] = $_POST['name'];
-					header('Location: index.php?action=administration'); // permet d'éviter le souci de cache
-					getArticlesInformations();
+					/*header('Location: index.php?action=administration'); // permet d'éviter le souci de cache*/
+					espaceAdmin();
 				}
 				else {
 				echo 'mauvaise combinaison de connexion';
@@ -76,6 +76,9 @@ try {
 				}
 			}
 		}
+		elseif (!empty($_SESSION['name'])) {
+          espaceAdmin();
+      }
 
 	}else {
 		listArticles();
