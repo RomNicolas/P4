@@ -56,6 +56,27 @@ try {
 				throw new Exception('Aucun identifiant de billet envoyé');
 			}
 		}
+		elseif($_GET['action'] == 'reportComment') {
+			reportComment($_GET['id']);
+		}
+		elseif ($_GET['action'] == 'connexion') {
+			connectAdmin();
+		}
+		elseif ($_GET['action'] == "administration") {
+			if(!empty($_POST['name']) && !empty($_POST['password'])) {
+				$pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
+				if($_POST['name'] == "admin" && $pwd == password_verify('admin', $pwd)) {
+					$_SESSION['name'] = $_POST['name'];
+					header('Location: index.php?action=administration'); // permet d'éviter le souci de cache
+					getArticlesInformations();
+				}
+				else {
+				echo 'mauvaise combinaison de connexion';
+				$errors['connexion'] = "Mauvaise combinaison de connexion";
+				}
+			}
+		}
+
 	}else {
 		listArticles();
 	}
