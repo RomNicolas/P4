@@ -48,6 +48,14 @@ try {
 				throw new Exception('Aucun identifiant de billet envoyé');
 			}
 		}
+		elseif ($_GET['action'] == 'delComment') {
+			if (isset($_GET['id']) && $_GET['id'] > 0) {
+				delComment($_GET['id']);
+			}
+			else {
+				throw new Exception('Aucun identifiant de billet envoyé');
+			}
+		}
 	}else {
 		listArticles();
 	}
