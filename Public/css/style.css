@@ -1,3 +1,288 @@
-html {
-	
+#connexion {
+	position: absolute;
+	top: 5%;
+	right: 2%;
+	color: black;
+	text-decoration: none;
+	font-style: initial;
+}
+
+#connexion:hover {
+	color: blue;
+}
+
+#back {
+	position: absolute;
+	top: 25%;
+	right: 2%;
+	color: black;
+	text-decoration: none;
+	font-style: initial;
+}
+
+#back:hover {
+	color: blue;
+}
+
+.deconnexion {
+	position: absolute;
+	top: 45%;
+	right: 2%;
+	color: black;
+	text-decoration: none;
+	font-style: initial;
+}
+
+.deconnexion:hover {
+	color: blue;
+}
+
+header {
+	background-color: rgb(224, 241, 255);
+	border-bottom: 3px rgb(218, 218, 218) solid;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	position: fixed;
+	font-style: italic;
+}
+
+header img {
+	position: absolute;
+	transform: translateY(25%);
+	left: 2%;
+	width: 370px;
+	height: 100px;
+}
+
+body {
+	background-color: rgb(240, 240, 240);
+}
+
+/*CSS listArticlesView*/
+#title-home {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+#chapter {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin-top: 10%;
+}
+
+.news {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	width: 70%;
+	margin: 0 15%;
+	margin-top: 2%;
+}
+
+h4 {
+	font-size: 1.5em;
+}
+
+.news p {
+	font-size: 1.1em;
+}
+
+#article-home {
+	margin: 1% 0;
+	display: flex;
+	justify-content: center;
+	color: blue;
+	text-decoration: none;
+}
+
+#article-border {
+	border-bottom: 1px rgb(217, 217, 217) solid;
+	width: 50%;
+	margin: 0 25%;
+}
+
+/*CSS articleView*/
+#back-index {
+	margin-top: 10%;
+}
+
+#com {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5%;
+}
+
+#form-com {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#form-com input {
+	width: 200px;
+	margin-bottom: 3%;
+}
+
+#form-com textarea {
+	width: 300px;
+	height: 100px;
+	margin-bottom: 3%;
+}
+
+#all-com {
+	width: 60%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 2% 20% 0 20%;
+	background-color: rgb(218, 218, 218);
+}
+
+#all-com a {
+	color: blue;
+}
+
+/*CSS modifyComment*/
+#the-com {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 10%;
+}
+
+#author2 {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+#modify-com {
+	text-align: center;
+	margin-top: 5%;
+}
+
+#modify-com textarea {
+	margin-top: 5%;
+	width: 350px;
+	height: 125px;
+}
+
+#modify-com input {
+	width: 100px;
+	height: 50px;
+	margin-top: 8%;
+	font-weight: bold;
+}
+
+/*CSS connexionView*/
+#co-admin {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 12%;
+}
+
+#co-form {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	width: 20%;
+	margin: 5% 40%;
+	margin-bottom: 8%;
+	padding: 10px;
+	border: black 1px solid black;
+	box-shadow: 1px 1px 2px black, -1px 1px 5px black;
+	background-color: rgb(60, 170, 255, 0.5);
+}
+
+#co-form input {
+	margin-top: 5%;
+	padding: 2% 2%;
+}
+
+#co-send {
+	font-weight: bold;
+	margin: 0 25%;
+	width: 50%;
+	margin-top: 10%;
+}
+
+/*CSS adminView*/
+#space {
+	margin-top: 12%;
+}
+
+#title-admin {
+	text-align: center;
+	margin-bottom: 3%;
+}
+
+#author-admin {
+	font-style: inherit;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+#table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: 0 15%;
+}
+
+#table td {
+  border: 1px solid black;
+  width: 25%;
+  text-align: center;
+  padding: 10px 10px;
+  font-weight: bold;
+}
+
+#table td a {
+	color: black;
+	text-decoration: none;
+}
+
+#table td a:hover {
+	color: blue;
+}
+
+#createArticle {
+	text-align: center;
+	margin-top: 4%;
+	font-size: 2em;
+}
+
+#createArticle a {
+	padding: 20px 20px;
+	text-decoration: none;
+	border: solid black 2px;
+	border-radius: 50%;
+	color: black;
+	box-shadow: 5px 5px 5px black;
+}
+#createArticle a:hover {
+	background-color: rgb(225, 225, 225);
+}
+
+/*CSS footer*/
+footer {
+	margin-top: 2%;
+	height: 100%;
+	background-color: rgb(224, 241, 255);
+	border-top: 3px rgb(218, 218, 218) solid;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-top: 6%;
+	padding: 3% 0;
+}
+
+footer a {
+	text-decoration: none;
 }
