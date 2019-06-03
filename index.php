@@ -1,6 +1,7 @@
 <?php
 
 require('controller/functions.php');
+session_start();
 
 try {
 	if (isset($_GET['action'])) {
@@ -59,28 +60,40 @@ try {
 		elseif($_GET['action'] == 'reportComment') {
 			reportComment($_GET['id']);
 		}
-		elseif ($_GET['action'] == 'connexion') {
-			connectAdmin();
-		}
 		elseif ($_GET['action'] == "administration") {
 			if(!empty($_POST['name']) && !empty($_POST['password'])) {
 				$pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
-				if($_POST['name'] == "admin" && $pwd == password_verify('admin', $pwd)) {
+				if($_POST['name'] == "Forteroche" && $pwd == password_verify('admin', $pwd)) {
 					$_SESSION['name'] = $_POST['name'];
-					/*header('Location: index.php?action=administration'); // permet d'éviter le souci de cache*/
+					header('Location: index.php?action=administration'); // permet d'éviter le souci de cache
 					espaceAdmin();
+				} else {
+					echo 'mauvaise combinaison de connexion';
+					$errors['connexion'] = "Mauvaise combinaison de connexion";
 				}
-				else {
-				echo 'mauvaise combinaison de connexion';
-				$errors['connexion'] = "Mauvaise combinaison de connexion";
-				}
+			} elseif (!empty($_SESSION['name'])) {
+				espaceAdmin();
+			} else {
+				header('Location: index.php');
+			}
+		} 
+		elseif ($_GET['action'] == "deconnexion") {
+			session_destroy();
+			header('Location: index.php');
+		} 
+		elseif ($_GET['action'] == 'modifyArticle') {
+			if(!empty($_GET['id']) && $_GET['id'] > 0) {
+				modifyArticle($_GET['id']);
 			}
 		}
-		elseif (!empty($_SESSION['name'])) {
-          espaceAdmin();
-      }
-
-	}else {
+		elseif($_GET['action'] == "connexion") {
+			if (empty($_SESSION['name'])) {
+				connectAdmin();
+			} else {
+				header('Location: index.php?action=administration');
+			}
+		}
+	} else {
 		listArticles();
 	}
 
