@@ -54,7 +54,6 @@ function delComment($id) {
 		throw new Exception('Impossible de modifier le commentaire !');
 	}
 	else {
-		echo 'commentaire : ' . $_POST['comment'];
 		header('Location: index.php');
 	}
 }
@@ -67,5 +66,47 @@ function reportComment($id) {
 	}
 	else {
 		header('Location: index.php');
+	}
+}
+
+function connectAdmin() {
+	require 'View/connexionView.php';
+}
+
+function espaceAdmin() {
+	$postManager = new \OpenClassrooms\Blog\Model\ArticleManager();
+	$posts = $postManager->getArticles();
+	require('View/adminView.php');
+}
+
+function newArticle() {
+	require 'View/createArticle.php';
+}
+
+function createArticle() {
+    $Manager = new \OpenClassrooms\Blog\Model\ArticleManager();
+    $createArticle = $Manager->createArticle();
+	header('Location: index.php');
+}
+
+function modifyArticle($id) {
+	$Manager = new \OpenClassrooms\Blog\Model\ArticleManager();
+	$modify = $Manager->modifyArticle($id);
+	require 'View/modifyArticle.php';
+}
+
+function valideModifArticle($id) {
+    $Manager = new \OpenClassrooms\Blog\Model\ArticleManager();
+    $validModif = $Manager->valideModifArticle($id);
+}
+
+function deleteArticle($id) {
+	$articleManager = new \OpenClassrooms\Blog\Model\ArticleManager();
+	$deleteArticle = $articleManager->deleteArticle($id);
+	if ($deleteArticle === false) {
+		throw new Exception("Impossible de supprimer l'article !");
+	}
+	else {
+		header('Location: index.php?action=administration');
 	}
 }
