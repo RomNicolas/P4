@@ -80,10 +80,33 @@ try {
 		elseif ($_GET['action'] == "deconnexion") {
 			session_destroy();
 			header('Location: index.php');
-		} 
+		}
+		elseif ($_GET['action'] == 'createArticle') {
+			if (!empty($_POST['title']) && !empty($_POST['createtextarea'])) {
+				createArticle();
+			}
+		}
+		elseif($_GET['action'] == "newArticle") {
+			if(!empty($_SESSION['name'])) {
+				newArticle();
+			} else {
+				header('Location: index.php?action=administration');
+			}
+		}
 		elseif ($_GET['action'] == 'modifyArticle') {
 			if(!empty($_GET['id']) && $_GET['id'] > 0) {
 				modifyArticle($_GET['id']);
+			}
+		}
+		elseif ($_GET['action'] == 'validModif') {
+			if(!empty($_GET['id']) && $_GET['id'] > 0) {
+				valideModifArticle($_GET['id']);
+				header('Location: index.php?action=administration');
+			}
+		}
+		elseif ($_GET['action'] == 'deleteArticle') {
+			if (isset($_GET['id']) && $_GET['id'] > 0) {
+				deleteArticle($_GET['id']);
 			}
 		}
 		elseif($_GET['action'] == "connexion") {
