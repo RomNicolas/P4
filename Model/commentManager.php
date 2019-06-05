@@ -56,8 +56,10 @@ class CommentManager extends Manager
     }
 
 	//Récupère les commentaires qui ont été signalés
-	public function reportComments() {
-		//SELECT
+	public function afficherReportComment() {
+		$db = $this->dbConnect();
+        $commentsDanger = $db->query('SELECT * FROM comments ORDER BY report DESC, date_creation DESC');
+        return $commentsDanger;
 	}
 
 }
