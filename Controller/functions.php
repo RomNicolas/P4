@@ -69,6 +69,12 @@ function reportComment($id) {
 	}
 }
 
+function afficherReportComment() {
+	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+    $moderateComments = $commentManager->afficherReportComment();
+    require 'View/reportComment.php';
+}
+
 function connectAdmin() {
 	require 'View/connexionView.php';
 }
