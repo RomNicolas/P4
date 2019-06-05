@@ -60,6 +60,13 @@ try {
 		elseif($_GET['action'] == 'reportComment') {
 			reportComment($_GET['id']);
 		}
+		elseif ($_GET['action'] == 'viewReport') {
+			if (!empty($_SESSION['name'])) {
+				afficherReportComment();
+			} else {
+				header('Location: index.php');
+			}
+		}
 		elseif ($_GET['action'] == "administration") {
 			if(!empty($_POST['name']) && !empty($_POST['password'])) {
 				$pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -82,9 +89,11 @@ try {
 			header('Location: index.php');
 		}
 		elseif ($_GET['action'] == 'createArticle') {
-			if (!empty($_POST['title']) && !empty($_POST['createtextarea'])) {
-				createArticle();
-			}
+			if(!empty($_SESSION['name'])) {
+				if (!empty($_POST['title']) && !empty($_POST['createtextarea'])) {
+					createArticle();
+				}
+			} else { header('Location: index.php?action=administration'); }
 		}
 		elseif($_GET['action'] == "newArticle") {
 			if(!empty($_SESSION['name'])) {
@@ -94,19 +103,31 @@ try {
 			}
 		}
 		elseif ($_GET['action'] == 'modifyArticle') {
-			if(!empty($_GET['id']) && $_GET['id'] > 0) {
-				modifyArticle($_GET['id']);
+			if(!empty($_SESSION['name'])) { 
+				if(!empty($_GET['id']) && $_GET['id'] > 0) {
+					modifyArticle($_GET['id']);
+				}
+			} else {
+				header('Location: index.php?action=administration');
 			}
 		}
 		elseif ($_GET['action'] == 'validModif') {
-			if(!empty($_GET['id']) && $_GET['id'] > 0) {
-				valideModifArticle($_GET['id']);
+			if(!empty($_SESSION['name'])) {
+				if(!empty($_GET['id']) && $_GET['id'] > 0) {
+					valideModifArticle($_GET['id']);
+					header('Location: index.php?action=administration');
+				}
+			} else {
 				header('Location: index.php?action=administration');
 			}
 		}
 		elseif ($_GET['action'] == 'deleteArticle') {
-			if (isset($_GET['id']) && $_GET['id'] > 0) {
-				deleteArticle($_GET['id']);
+			if(!empty($_SESSION['name'])) { 
+				if (isset($_GET['id']) && $_GET['id'] > 0) {
+					deleteArticle($_GET['id']);
+				}
+			} else {
+				header('Location: index.php?action=administration');
 			}
 		}
 		elseif($_GET['action'] == "connexion") {
