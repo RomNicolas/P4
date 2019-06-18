@@ -1,7 +1,7 @@
 <?php
 
 namespace OpenClassrooms\Blog\Model;
-require_once("model/Manager.php");
+require_once("Manager.php");
 
 class CommentManager extends Manager
 {
@@ -34,7 +34,7 @@ class CommentManager extends Manager
 	//Confirme la modification du commentaire
 	public function updateComment($id, $comment) {
 		$db = $this->dbConnect();
-		$req = $db->prepare('UPDATE comments SET comment = ?, date_creation = NOW() WHERE id = ?');
+		$req = $db->prepare('UPDATE comments SET comment = ?, date_modification = NOW(), report = 0 WHERE id = ?');
 		$newComment = $req->execute(array($comment, $id));
 		return $newComment;
 	}
@@ -60,6 +60,13 @@ class CommentManager extends Manager
 		$db = $this->dbConnect();
         $commentsDanger = $db->query('SELECT * FROM comments ORDER BY report DESC, date_creation DESC');
         return $commentsDanger;
+	}
+
+	public function approuvComment($id) {
+		$db = $this->dbConnect();
+		$comments = $db->prepare('UPDATE comments SET report = 0 WHERE id = ?');
+		$comments->execute(array($id));
+		return $comments;
 	}
 
 }
