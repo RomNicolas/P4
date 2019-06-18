@@ -1,8 +1,8 @@
 <?php
 
 // Chargement des classes
-require_once('model/articleManager.php');
-require_once('model/commentManager.php');
+require_once('Model/articleManager.php');
+require_once('Model/commentManager.php');
 
 function listArticles() {
 	$postManager = new \OpenClassrooms\Blog\Model\ArticleManager();
@@ -73,6 +73,17 @@ function afficherReportComment() {
 	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
     $moderateComments = $commentManager->afficherReportComment();
     require 'View/reportComment.php';
+}
+
+function approuvComment($id) {
+	$commentManager = new \OpenClassrooms\Blog\Model\CommentManager();
+	$reportComment = $commentManager->approuvComment($id);
+	if ($reportComment === false) {
+		throw new Exception('Impossible de signaler le commentaire !');
+	}
+	else {
+		header('Location: index.php?action=administration');
+	}
 }
 
 function connectAdmin() {
