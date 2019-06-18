@@ -1,7 +1,11 @@
 <?php
-
-require('controller/functions.php');
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+require('Controller/functions.php');
 
 try {
 	if (isset($_GET['action'])) {
@@ -67,12 +71,19 @@ try {
 				header('Location: index.php');
 			}
 		}
+		elseif($_GET['action'] == 'okComment') {
+			if (!empty($_SESSION['name'])) {
+				approuvComment($_GET['id']);
+			} else {
+				header('Location: index.php');
+			}
+		}
 		elseif ($_GET['action'] == "administration") {
 			if(!empty($_POST['name']) && !empty($_POST['password'])) {
 				$pwd = password_hash($_POST['password'], PASSWORD_DEFAULT);
 				if($_POST['name'] == "Forteroche" && $pwd == password_verify('admin', $pwd)) {
 					$_SESSION['name'] = $_POST['name'];
-					header('Location: index.php?action=administration'); // permet d'éviter le souci de cache
+					header('Location: index.php?action=administration');
 					espaceAdmin();
 				} else {
 					echo 'mauvaise combinaison de connexion';
