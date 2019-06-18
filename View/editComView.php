@@ -1,29 +1,22 @@
 <?php $title = 'Modifier un commentaire' ?>
   
 <?php ob_start(); ?>
-<h1>Mon super blog !</h1>
-<p><a href="index.php">Retour aux billets</a></p>
-  
-  
-  
+
+<div id="the-com">
 <h2>Modifier un commentaire</h2>
-  
-<form action="index.php?action=editComment&amp;id=<?= $comment['id'] ?>" method="post">
+<form id="modify-com" action="index.php?action=editComment&amp;id=<?= $comment['id'] ?>" method="post">
     <div>
-        <p>Auteur : <?= $comment['author'] ?></p>
-        <label for="comment">Commentaire</label><br />
+        <p id="author2">Auteur : <?= $comment['author'] ?></p>
+        <label for="comment"></label><br />
         <textarea id="comment" name="comment"><?= $comment['comment'] ?></textarea>
     </div>
     <div>
         <input type="submit" value="Modifier">
     </div>
 </form>
-<form action="index.php?action=editComment&amp;id=<?= $comment['id'] ?>" method="post">
-        <input type="submit" value="Supprimer">
-</form>
+</div>
   
-<script type="text/javascript">document.addEventListener('submit', function(){window.alert('Votre commentaire a été modifié')});</script> 
+<script> document.addEventListener('submit', function(){window.alert('Votre commentaire a été modifié')}); </script> 
 
 <?php $content = ob_get_clean(); ?>
-  
 <?php require('template.php'); ?>

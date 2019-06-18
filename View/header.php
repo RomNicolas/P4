@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-<img src="./public/images/alaska.png">
+<img src="./Public/images/alaska.png" alt="Logo de l'Alaska"/>
 <div id="title-home">
     <a href="index.php?action=connexion" id="connexion">Espace Administrateur</a>
 	<a id="back" href="index.php">Liste des articles</a>

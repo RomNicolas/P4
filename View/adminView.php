@@ -28,8 +28,12 @@
 
 <?php } ?>
 
-<div id="createArticle">
-    <a href="index.php?action=createArticle">Création d'un article</a>
+<div class="blockArticle">
+    <a href="index.php?action=newArticle">Création d'un article</a>
+</div>
+
+<div class="blockArticle">
+    <a href="index.php?action=viewReport">Liste des commentaires signalés</a>
 </div>
 
 

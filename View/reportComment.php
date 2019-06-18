@@ -14,6 +14,7 @@
         <p><strong><?= $datas['author']; ?></strong> le <?= $datas['date_creation'] ?></p>
         <p>
             <?= $datas['comment']; ?>
+            <a href="index.php?action=okComment&amp;id=<?= $datas['id'] ?>"> (approuver) </a> /
             <a href="index.php?action=viewComment&amp;id=<?= $datas['id'] ?>"> (modifier)</a> /
             <a href="index.php?action=delComment&amp;id=<?= $datas['id'] ?>">(supprimer)</a> 
             <?php } ?>
